@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import getWeb3 from '../Utilis/getWeb3';
-
+import axios from 'axios';
 import '../App.css';
 
 class Homepage extends Component {
@@ -24,16 +24,21 @@ class Homepage extends Component {
     event.preventDefault();
     const data = new FormData(event.target);
 
-    this.setState({
+    await this.setState({
       username: data.get('username'),
       password: data.get('password'),
       accounts: await this.state.web3.eth.getAccounts()
     });
     console.log(this.state);
-    // fetch('/api/form-submit-url', {
-    //   method: 'POST',
-    //   body: data
-    // });
+    await axios
+      .post('http://localhost:4000', {
+        username: this.state.username,
+        password: this.state.password,
+        accounts: this.state.accounts
+      })
+      .then((res) => {
+        console.log(res);
+      });
   }
 
   render() {
