@@ -11,12 +11,12 @@ router.post('/signup', async (req, res) => {
   const user = await User.findOne({
     username: req.body.username
   });
-  if (user != null) {
+  if (user == null) {
     await new User({
-      name: name,
-      username: username,
-      password: password,
-      accounts: accounts
+      name: req.body.name,
+      username: req.body.username,
+      password: req.body.password,
+      accounts: req.body.accounts
     }).save();
     await res.status(200).json({
       authenticated: true,
