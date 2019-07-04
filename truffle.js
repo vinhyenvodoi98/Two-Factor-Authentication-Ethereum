@@ -1,9 +1,12 @@
+const path = require('path');
+
 module.exports = {
+  contracts_build_directory: path.join(__dirname, 'frontend/src/contracts'),
   networks: {
     development: {
-      host: "localhost",
+      host: 'localhost',
       port: 8545,
-      network_id: "*" // Match any network id
+      network_id: '*' // Match any network id
     }
   }
 };
