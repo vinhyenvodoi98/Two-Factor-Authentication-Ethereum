@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 import getWeb3 from '../Utilis/getWeb3';
 import axios from 'axios';
 import '../style/login.css';
@@ -65,16 +66,32 @@ class LoginPage extends Component {
                   name='password'
                   type='password'
                 />
-                <button className='button '>Submit</button>
+                <div>
+                  <button className='button' onClick={this.handleSubmit}>
+                    Submit
+                  </button>
+                  <Route
+                    render={({ history }) => (
+                      <button
+                        className='button'
+                        onClick={() => {
+                          history.push('/signup');
+                        }}
+                      >
+                        SignUp
+                      </button>
+                    )}
+                  />
+                </div>
               </form>
             </div>
           </div>
         );
       } else {
-        return <div className='background'>Hello ban :{this.state.name}</div>;
+        return <div className=''>Hello ban :{this.state.name}</div>;
       }
     } else {
-      return <div className='background' />;
+      return <div className='' />;
     }
   }
 }
