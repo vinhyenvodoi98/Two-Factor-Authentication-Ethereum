@@ -35,10 +35,11 @@ router.post('/login', async (req, res) => {
     username: req.body.username
   });
   if (user != null) {
-    console.log(req.body);
+    // console.log(req.body);
     await res.status(200).json({
       authenticated: true,
-      message: 'user successfully authenticated'
+      message: 'user successfully authenticated',
+      contractAdress: '0xb469092982e3a7b19B6e0aa477B0A26a77dB3A50'
     });
   }
 });
