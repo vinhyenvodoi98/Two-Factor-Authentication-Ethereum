@@ -9,10 +9,12 @@ class LoginPage extends Component {
     super(props);
     this.state = {
       web3: {},
-      name: 'Hoang',
+      name: '',
       username: '',
       password: '',
       accounts: '',
+      contractAddress: '',
+      haveContratAddress: false,
       login: false
     };
 
@@ -34,13 +36,14 @@ class LoginPage extends Component {
     });
     console.log(this.state);
     await axios
-      .post('http://localhost:4000', {
+      .post('http://localhost:4000/login', {
         username: this.state.username,
         password: this.state.password,
         accounts: this.state.accounts
       })
       .then((res) => {
-        console.log(res);
+        this.setState({ contractAdress: res.data.contractAdress, haveContratAddress: true });
+        // console.log(res);
       });
   }
 
@@ -66,10 +69,11 @@ class LoginPage extends Component {
                   name='password'
                   type='password'
                 />
+
+                {this.state.havecontractAddress ? <div /> : <div>{this.state.contractAdress}</div>}
+
                 <div>
-                  <button className='button' onClick={this.handleSubmit}>
-                    Submit
-                  </button>
+                  <button className='button'>Submit</button>
                   <Route
                     render={({ history }) => (
                       <button
