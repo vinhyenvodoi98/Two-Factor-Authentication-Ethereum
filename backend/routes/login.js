@@ -7,6 +7,15 @@ router.get('/', (req, res) => {
   });
 });
 
+router.post('/image', async (req, res) => {
+  console.log(req.body);
+  await res.status(200).json({
+    authenticated: true,
+    message: 'user successfully authenticated'
+    // contractAdress: '0xb469092982e3a7b19B6e0aa477B0A26a77dB3A50'
+  });
+});
+
 router.post('/signup', async (req, res) => {
   const user = await User.findOne({
     username: req.body.username

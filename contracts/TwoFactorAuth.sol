@@ -1,27 +1,18 @@
 pragma solidity ^0.5.0;
 
-
-/// Use an ethereum address as proof of 2FA instead of a phone number.
 contract TwoFactorAuth {
   address private userPublickey;
-  string private webside; //check url where user verify
   bool private isLogin;
-  uint8 private loginTime;
-
-  /// @dev The event which logs an Ethereum 2FA call that a server can listen to.
-  // event Authenticated(address _user);
-
-  /// Set the url and service strings on construction.
-  /// @param _userPublickey The url this contract is intended to provide 2FA for.
+  uint8 private loginTime; //it make sure this contract it work only one time
 
   constructor(address _userPublickey) public {
     loginTime = 1;
     isLogin = false;
     userPublickey = _userPublickey;
-    // webside = _webside;
   }
 
-  function login () public payable returns (bool)  {
+  // this function for user call to verify and it run only one time
+  function login () public returns (bool)  {
     if( keccak256(abi.encodePacked((userPublickey))) == keccak256(abi.encodePacked((msg.sender))) && loginTime == 1 ){
       // emit Authenticated(msg.sender);
       isLogin = true;
@@ -32,27 +23,32 @@ contract TwoFactorAuth {
     }
   }
 
-  /// Server checking 2FA.
-  function CheckingByServer() public payable returns (bool) {
-    if(isLogin == true){
+  /// Server checking 2FA it also run only one time.
+  function CheckingByServer() public returns (bool) {
+    if(isLogin == true && loginTime > 1 ){
       loginTime ++;
-      isLogin == false;
+      isLogin = false;
       return true;
     }else{
-      isLogin == false;
+      isLogin = false;
       return false;
     }
   }
 
+  // this function for develop
   function viewUserPublicKey () public view returns (address){
     return userPublickey;
   }
 
-  function viewsender () public view returns (address){
+  // this function for develop
+  function viewSender () public view returns (address){
     return msg.sender;
   }
 
+  // this function for develop
   function isUserLogin () public view returns(bool){
     return isLogin;
   }
+
+  function() external payable {}
 }
