@@ -9,6 +9,9 @@ const login = require('./routes/login');
 require('dotenv').config();
 require('express-session');
 
+// create .env and setup mongo like this
+// MONGODB_URI = 'mongodb://<username>:<pass>@<yourId>.mlab.com:<yourDatabase>/'
+
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }, () => {
   console.log('connected to mongo db');
 });
