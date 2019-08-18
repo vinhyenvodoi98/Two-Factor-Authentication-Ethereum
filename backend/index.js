@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const login = require('./routes/login');
+const helper = require('./helpers/contactWithBlockchain');
 require('dotenv').config();
 require('express-session');
 
@@ -29,7 +30,17 @@ app.use(
   })
 );
 
-app.use('/', login);
+// test
+app.use('/login', login);
+
+//
+app.get('/', async (req, res) => {
+  await helper.setCEO();
+  res.status(200).json({
+    authenticated: true,
+    message: 'user successfully authenticated'
+  });
+});
 
 app.listen(port, () => console.log(`Server is running on port ${port}!`));
 

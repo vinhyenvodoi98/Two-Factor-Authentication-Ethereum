@@ -15,8 +15,9 @@
   "dependencies": {
     "chai": "^4.1.1",
     "chai-as-promised": "^7.1.1",
-    "react-router-dom": "^5.0.1",
+    "fs": "^0.0.1-security",
     "truffle": "^5.0.32",
+    "truffle-hdwallet-provider": "^1.0.16",
     "zeppelin-solidity": "^1.2.0"
   },
   "engines": {
