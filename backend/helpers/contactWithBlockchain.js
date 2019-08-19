@@ -14,21 +14,21 @@ web3.setProvider(provider);
 const setCEO = async () => {
   const from = await web3.eth.getCoinbase();
   const factoryContract = new web3.eth.Contract(Factory.abi, factoryAddress.address, { from });
-  console.log(factoryContract._jsonInterface);
-  return factoryContract._jsonInterface;
-  // set wallet in backend CEO
+  var ceoAddress = await factoryContract.methods.ceoAddress().call({ from });
+  return ceoAddress;
 };
 
-const createContract = () => {
-  //   create contract with factory
+const createContract = async (userAddress) => {
+  const from = await web3.eth.getCoinbase();
+  const factoryContract = new web3.eth.Contract(Factory.abi, factoryAddress.address, { from });
+  var createTwoFactorAuth = await factoryContract.methods
+    .createTwoFactorAuth(userAddress)
+    .call({ from });
+  return createTwoFactorAuth;
 };
 
 const checkUserLogin = () => {
   //check is user login
-};
-
-const test = () => {
-  //
 };
 
 module.exports = {

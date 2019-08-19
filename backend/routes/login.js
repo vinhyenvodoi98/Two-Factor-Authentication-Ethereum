@@ -1,30 +1,42 @@
 const router = require('express').Router();
+const bcrypt = require('bcrypt');
 const User = require('../models/user');
+const helper = require('../helpers/contactWithBlockchain');
 
-router.get('/', (req, res) => {
-  res.json({
-    message: 'hello world'
-  });
-});
+const saltRounds = 10;
+
+// router.post('/2FAuth', async (req, res) => {
+//   var contractAddress = await helper.createContract(req.body.address);
+//   res.json({
+//     authenticated: true,
+//     contractAddress: contractAddress
+//   });
+// });
 
 router.post('/image', async (req, res) => {
-  console.log(req.body);
   await res.status(200).json({
     authenticated: true,
     message: 'user successfully authenticated'
-    // contractAdress: '0xb469092982e3a7b19B6e0aa477B0A26a77dB3A50'
   });
 });
 
 router.post('/signup', async (req, res) => {
+  console.log('sadasd');
   const user = await User.findOne({
     username: req.body.username
   });
+
+  //Bug await qua lau
+
   if (user == null) {
+    password = await bcrypt.hash(req.body.password, saltRounds);
+
+    console.log(password);
+
     await new User({
       name: req.body.name,
       username: req.body.username,
-      password: req.body.password,
+      password: password,
       accounts: req.body.accounts
     }).save();
     await res.status(200).json({
@@ -44,11 +56,14 @@ router.post('/login', async (req, res) => {
     username: req.body.username
   });
   if (user != null) {
-    // console.log(req.body);
+    // query user address from database
+    // UserAddress =
+    var contractAddress = await helper.createContract(UserAddress);
+
     await res.status(200).json({
       authenticated: true,
       message: 'user successfully authenticated',
-      contractAdress: '0xb469092982e3a7b19B6e0aa477B0A26a77dB3A50'
+      contractAddress: contractAddress
     });
   }
 });

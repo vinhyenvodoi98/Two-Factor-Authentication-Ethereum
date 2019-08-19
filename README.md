@@ -42,6 +42,18 @@ MONGODB_URI = 'LINK TO MONGODB', //like : MONGODB_URI = 'mongodb://dohoang123:do
 MNEMONIC = <YOUR MNEMONIC>,
 ```
 
+#If you run in testnet make sure your accout have eth
+
+Run script in truffle develop
+
+```js
+web3.eth.sendTransaction({
+  from: accounts[0],
+  to: 'YOUR ACCOUNT ADDRESS',
+  value: web3.utils.toWei('1', 'ether') // send 1 eth
+});
+```
+
 ```bash
 # Install Truffle and the Ethereum TestRPC dev tools.
 npm install -g truffle ethereumjs-testrpc
