@@ -35,10 +35,10 @@ app.use('/login', login);
 
 //
 app.get('/', async (req, res) => {
-  await helper.setCEO();
+  var contract = await helper.setCEO();
   res.status(200).json({
     authenticated: true,
-    message: 'user successfully authenticated'
+    message: contract
   });
 });
 

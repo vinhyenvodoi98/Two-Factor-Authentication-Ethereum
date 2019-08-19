@@ -26,6 +26,22 @@ Dependencies:
 - Ethereum TestRPC
 - Truffle
 
+# Setup .env
+
+Create .env file
+
+```js
+MNEMONIC = 'YOUR MNEMONIC',
+INFURA_KEY = <YOUR INFURA KEY>
+```
+
+Create .enc in /backend
+
+```js
+MONGODB_URI = 'LINK TO MONGODB', //like : MONGODB_URI = 'mongodb://dohoang123:dohoang123@ds347467.mlab.com:47467/2fa-ethereum',
+MNEMONIC = <YOUR MNEMONIC>,
+```
+
 ```bash
 # Install Truffle and the Ethereum TestRPC dev tools.
 npm install -g truffle ethereumjs-testrpc
@@ -34,12 +50,11 @@ npm install -g truffle ethereumjs-testrpc
 npm install
 
 # Start the truffle testrpc
+
 yarn truffle develop --network truffleTestnet
 
 # In a new terminal window, run the truffle tests
+
 truffle test
+
 ```
-
-#
-
-&copy; Copyright 2017 by Liam Gray — Released under the ISC licence.

@@ -14,7 +14,8 @@ web3.setProvider(provider);
 const setCEO = async () => {
   const from = await web3.eth.getCoinbase();
   const factoryContract = new web3.eth.Contract(Factory.abi, factoryAddress.address, { from });
-  console.log(factoryContract);
+  console.log(factoryContract._jsonInterface);
+  return factoryContract._jsonInterface;
   // set wallet in backend CEO
 };
 
