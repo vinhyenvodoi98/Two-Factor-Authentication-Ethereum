@@ -47,10 +47,11 @@ MNEMONIC = <YOUR MNEMONIC>,
 Run script in truffle develop
 
 ```js
+// send 1 eth
 web3.eth.sendTransaction({
   from: accounts[0],
   to: 'YOUR ACCOUNT ADDRESS',
-  value: web3.utils.toWei('1', 'ether') // send 1 eth
+  value: web3.utils.toWei('1', 'ether')
 });
 ```
 

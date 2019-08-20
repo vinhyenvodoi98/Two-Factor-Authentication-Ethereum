@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import getWeb3 from '../Utilis/getWeb3';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+// import store from 'store';
 import axios from 'axios';
 import '../style/login.css';
 
@@ -8,7 +10,7 @@ class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      web3: {},
+      // web3: {},
       name: '',
       username: '',
       password: '',
@@ -21,9 +23,9 @@ class LoginPage extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  async componentWillMount() {
-    this.setState({ web3: await getWeb3() });
-  }
+  // async componentWillMount() {
+  //   this.setState({ web3: await getWeb3() });
+  // }
 
   async handleSubmit(event) {
     event.preventDefault();
@@ -48,7 +50,8 @@ class LoginPage extends Component {
   }
 
   render() {
-    if (this.state.web3.eth !== undefined) {
+    // console.log(this.props.login);
+    if (this.props.login.web3 !== undefined) {
       if (!this.state.login) {
         return (
           <div className='login_container'>
@@ -100,4 +103,10 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginPage;
+const mapStatetoProps = (state) => {
+  return {
+    login: state.login
+  };
+};
+
+export default compose(connect(mapStatetoProps))(LoginPage);
