@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 import '../style/login.css';
 
 class SignUpPage extends Component {
@@ -9,7 +11,7 @@ class SignUpPage extends Component {
       name: '',
       username: '',
       password: '',
-      accounts: ''
+      etherAddress: ''
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,18 +22,20 @@ class SignUpPage extends Component {
   async handleSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.target);
-
+    var etherAddress = await this.props.login.web3.eth.getAccounts();
     await this.setState({
       name: data.get('name'),
       username: data.get('username'),
-      password: data.get('password')
+      password: data.get('password'),
+      etherAddress: etherAddress[0]
     });
-    console.log(this.state);
+    console.log(this.state.etherAddress);
     await axios
       .post('http://localhost:4000/signup', {
         name: this.state.name,
         username: this.state.username,
-        password: this.state.password
+        password: this.state.password,
+        etherAddress: this.state.etherAddress
       })
       .then((res) => {
         console.log(res);
@@ -58,7 +62,7 @@ class SignUpPage extends Component {
               Enter your password
             </label>
             <input className='input space_around' id='password' name='password' type='password' />
-            <button className='button '>Submit</button>
+            <button className='button'>Submit</button>
           </form>
         </div>
       </div>
@@ -66,4 +70,10 @@ class SignUpPage extends Component {
   }
 }
 
-export default SignUpPage;
+const mapStatetoProps = (state) => {
+  return {
+    login: state.login
+  };
+};
+
+export default compose(connect(mapStatetoProps))(SignUpPage);

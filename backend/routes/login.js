@@ -21,23 +21,18 @@ router.post('/image', async (req, res) => {
 });
 
 router.post('/signup', async (req, res) => {
-  console.log('sadasd');
   const user = await User.findOne({
     username: req.body.username
   });
 
-  //Bug await qua lau
-
   if (user == null) {
     password = await bcrypt.hash(req.body.password, saltRounds);
-
-    console.log(password);
 
     await new User({
       name: req.body.name,
       username: req.body.username,
       password: password,
-      accounts: req.body.accounts
+      etherAddress: req.body.etherAddress
     }).save();
     await res.status(200).json({
       authenticated: true,

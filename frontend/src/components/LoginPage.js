@@ -10,7 +10,6 @@ class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // web3: {},
       name: '',
       username: '',
       password: '',
@@ -23,10 +22,6 @@ class LoginPage extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  // async componentWillMount() {
-  //   this.setState({ web3: await getWeb3() });
-  // }
-
   async handleSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.target);
@@ -34,14 +29,13 @@ class LoginPage extends Component {
     await this.setState({
       username: data.get('username'),
       password: data.get('password'),
-      accounts: await this.state.web3.eth.getAccounts()
+      etherAddress: await this.props.login.web3.eth.getAccounts()
     });
-    console.log(this.state);
     await axios
       .post('http://localhost:4000/login', {
         username: this.state.username,
         password: this.state.password,
-        accounts: this.state.accounts
+        etherAddress: this.state.etherAddress
       })
       .then((res) => {
         this.setState({ contractAdress: res.data.contractAdress, haveContratAddress: true });

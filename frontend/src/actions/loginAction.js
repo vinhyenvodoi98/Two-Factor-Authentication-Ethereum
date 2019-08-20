@@ -4,11 +4,12 @@ import TwoFactorAuthJson from '../contracts/TwoFactorAuth.json';
 export const WEB3_CONNECT = 'WEB3_CONNECT';
 export const web3Connect = () => async (dispatch) => {
   const web3 = await getWeb3();
-  const accounts = await web3.eth.getAccounts();
-  if (accounts.length > 0) {
+  const etherAddress = await web3.eth.getAccounts();
+  if (etherAddress.length > 0) {
     dispatch({
       type: WEB3_CONNECT,
-      web3
+      web3,
+      etherAddress
     });
   } else {
     console.log('Account not found');
