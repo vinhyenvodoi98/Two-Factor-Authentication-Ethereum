@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Route } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import '../style/login.css';
@@ -45,25 +46,88 @@ class SignUpPage extends Component {
   render() {
     return (
       <div className='login_container'>
-        <div className='form_box'>
-          <h2 className='space_around'>Sign Up</h2>
-          <form className='form' onSubmit={this.handleSubmit}>
-            <label className='space_around' htmlFor='name'>
-              Enter fullname
-            </label>
-            <input className='input space_around' id='name' name='name' type='text' />
+        <div className='box'>
+          <div className='choice_container'>
+            <div className='c1'>
+              <div className='c11' />
 
-            <label className='space_around' htmlFor='username'>
-              Enter username
-            </label>
-            <input className='input space_around' id='username' name='username' type='text' />
+              <Route
+                render={({ history }) => (
+                  <div
+                    id='left'
+                    onClick={() => {
+                      history.push('/');
+                    }}
+                  >
+                    <h1 className='s1class'>
+                      <span>SIGN</span>
+                      <span className='su'>IN</span>
+                    </h1>
+                  </div>
+                )}
+              />
+              <Route
+                render={({ history }) => (
+                  <div
+                    id='right'
+                    onClick={() => {
+                      history.push('/signup');
+                    }}
+                  >
+                    <h1 className='s2class text-color'>
+                      <span>SIGN</span>
+                      <span className='su'>UP</span>
+                    </h1>
+                  </div>
+                )}
+              />
+            </div>
+          </div>
+        </div>
 
-            <label className='space_around' htmlFor='password'>
-              Enter your password
-            </label>
-            <input className='input space_around' id='password' name='password' type='password' />
-            <button className='button'>Submit</button>
-          </form>
+        <div className='box'>
+          <div className='choice_container'>
+            <div className='c2'>
+              <div className='form_box'>
+                <h1 className='space_around'>Sign Up</h1>
+                <form className='form' onSubmit={this.handleSubmit}>
+                  <label className='space_around' htmlFor='name'>
+                    Enter Fullname
+                  </label>
+                  <input
+                    className='input space_around'
+                    id='name'
+                    name='name'
+                    type='text'
+                    placeholder='Full name*'
+                  />
+
+                  <label className='space_around' htmlFor='username'>
+                    Enter username
+                  </label>
+                  <input
+                    className='input space_around'
+                    id='username'
+                    name='username'
+                    type='text'
+                    placeholder='Username*'
+                  />
+
+                  <label className='space_around' htmlFor='password'>
+                    Enter your password
+                  </label>
+                  <input
+                    className='input space_around'
+                    id='password'
+                    name='password'
+                    type='password'
+                    placeholder='Password*'
+                  />
+                  <button className='button'>Submit</button>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );

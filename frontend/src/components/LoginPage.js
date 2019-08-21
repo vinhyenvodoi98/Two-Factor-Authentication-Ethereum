@@ -49,42 +49,72 @@ class LoginPage extends Component {
       if (!this.state.login) {
         return (
           <div className='login_container'>
-            <div className='form_box'>
-              <h2 className='space_around'>Login</h2>
-              <form className='form' onSubmit={this.handleSubmit}>
-                <label className='space_around' htmlFor='username'>
-                  Enter username
-                </label>
-                <input className='input space_around' id='username' name='username' type='text' />
-
-                <label className='space_around' htmlFor='password'>
-                  Enter your password
-                </label>
-                <input
-                  className='input space_around'
-                  id='password'
-                  name='password'
-                  type='password'
-                />
-
-                {this.state.havecontractAddress ? <div /> : <div>{this.state.contractAdress}</div>}
-
-                <div>
-                  <button className='button'>Submit</button>
+            <div className='box'>
+              <div className='choice_container'>
+                <div className='c1'>
+                  <div className='c11' />
+                  <div id='left'>
+                    <h1 className='s1class text-color'>
+                      <span>SIGN</span>
+                      <span className='su'>IN</span>
+                    </h1>
+                  </div>
                   <Route
                     render={({ history }) => (
-                      <button
-                        className='button'
+                      <div
+                        id='right'
                         onClick={() => {
                           history.push('/signup');
                         }}
                       >
-                        SignUp
-                      </button>
+                        <h1 className='s2class'>
+                          <span>SIGN</span>
+                          <span className='su'>UP</span>
+                        </h1>
+                      </div>
                     )}
                   />
                 </div>
-              </form>
+              </div>
+            </div>
+
+            <div className='box'>
+              <div className='choice_container'>
+                <div className='c2'>
+                  <h1 className='space_around'>Login</h1>
+                  <form className='form' onSubmit={this.handleSubmit}>
+                    <label className='space_around' htmlFor='username'>
+                      Enter username
+                    </label>
+                    <input
+                      className='input space_around'
+                      id='username'
+                      name='username'
+                      type='text'
+                      placeholder='Username*'
+                    />
+
+                    <label className='space_around' htmlFor='password'>
+                      Enter your password
+                    </label>
+                    <input
+                      className='input space_around'
+                      id='password'
+                      name='password'
+                      type='password'
+                      placeholder='Password*'
+                    />
+
+                    {this.state.havecontractAddress ? (
+                      <div />
+                    ) : (
+                      <div>{this.state.contractAdress}</div>
+                    )}
+
+                    <button className='button'>Submit</button>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
         );

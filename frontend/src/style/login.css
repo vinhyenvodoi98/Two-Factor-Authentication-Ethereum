@@ -1,31 +1,25 @@
 .login_container {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 30%;
-  height: 60%;
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  height: 100vh;
+  margin: auto;
+  justify-content: space-around;
 }
 
-.button {
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 20px;
-  cursor: pointer;
-  background-image: radial-gradient(circle at top right, #fd6863, #ffd36f);
-  border: 0;
-  height: 35px;
-  width: 105px;
-  font-weight: 600;
-  font-family: Helvetica, sans-serif;
-  color: white;
-  border-radius: 20px;
+.box {
+  display: flex;
+  position: relative;
+  width: 50%;
+  height: 100vh;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
 }
 
 .form_box {
   display: block;
-  border-radius: 10px;
-  margin-top: 200px;
   margin-bottom: auto;
   background-color: white;
 }
@@ -34,17 +28,157 @@
   display: flex;
   justify-content: space-around;
   flex-direction: column;
+  height: 87%;
 }
 
 .input {
-  height: 30px;
-  border-radius: 15px;
-  padding: 10px;
-  margin-left: 80px !important ;
-  margin-right: 80px !important;
-  /* border: 0; */
+  font-weight: bold;
+  /* width: 100%; */
+  margin: 0 35px 20px;
+  height: 35px;
+  padding: 6px 15px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  background: #f6f7f9;
+  color: #748194;
+  font-size: 14px;
 }
 
 .space_around {
-  margin: 20px;
+  margin: 15px;
+}
+
+.choice_container {
+  position: absolute;
+  width: auto;
+  height: auto;
+  border-radius: 15px 15px 15px 15px;
+}
+
+.c1 {
+  box-shadow: 0 0 10px grey;
+  background-color: white;
+  width: 300px;
+  height: 500px;
+  display: inline-block;
+  border-radius: 15px 15px 15px 15px;
+}
+
+.c11 {
+  background-image: url('https://i.pinimg.com/736x/b8/09/22/b80922f6ea2daaf36a6627378662803b--deck-of-cards-phone-wallpapers.jpg');
+  background-size: 300px 400px;
+  background-repeat: no-repeat;
+  background-color: white;
+  width: 300px;
+  height: 400px;
+  display: inline-block;
+  position: absolute;
+  z-index: 4;
+  border-radius: 15px 15px 200px 200px;
+}
+
+#left,
+#right {
+  text-align: center;
+  color: white;
+  display: inline-block;
+  width: 146px;
+  height: 500px;
+  background-color: white;
+  cursor: pointer;
+}
+
+#left {
+  border-radius: 15px 0px 0px 15px;
+}
+
+#right {
+  border-radius: 15px 15px 15px 0px;
+}
+
+.left_hover {
+  color: #ee9ba3;
+  box-shadow: 5px 0 18px -10px #333;
+  z-index: 1;
+  position: absolute;
+}
+
+.right_hover {
+  box-shadow: -5px 0 15px -10px #333;
+  z-index: 1;
+  position: absolute;
+}
+
+.s1class {
+  color: #748194;
+  position: absolute;
+  bottom: 0;
+  left: 63%;
+  margin-left: -50%;
+}
+
+.s1class span,
+.s2class span {
+  display: block;
+}
+
+.su {
+  font-size: 20px;
+}
+
+.s2class {
+  color: #748194;
+  position: absolute;
+  bottom: 0;
+  right: 63%;
+  margin-right: -50%;
+}
+
+.mainhead {
+  color: white;
+  font-size: 24px;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.mainp {
+  color: white;
+  font-size: 13px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.c2 {
+  box-shadow: 0 0 10px grey;
+  background-color: white;
+  width: 300px;
+  height: 500px;
+  border-radius: 15px;
+  left: 370px;
+  display: inline-block;
+  text-align: center;
+}
+
+button {
+  font-weight: bold;
+  margin: 0 35px 20px;
+  height: 45px;
+  padding: 6px 15px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  background: #ee9ba3;
+  color: white;
+  font-size: 14px;
+}
+
+h1 {
+  color: #748194;
+  font-size: 30px;
+  text-align: center;
+}
+
+.text-color {
+  color: rgb(238, 155, 163);
 }
