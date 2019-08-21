@@ -10,7 +10,6 @@ class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
       username: '',
       password: '',
       accounts: '',
@@ -38,7 +37,8 @@ class LoginPage extends Component {
         etherAddress: this.state.etherAddress
       })
       .then((res) => {
-        this.setState({ contractAdress: res.data.contractAdress, haveContratAddress: true });
+        console.log(res);
+        this.setState({ contractAddress: res.data.contractAddress, haveContratAddress: true });
         // console.log(res);
       });
   }
@@ -108,7 +108,9 @@ class LoginPage extends Component {
                     {this.state.havecontractAddress ? (
                       <div />
                     ) : (
-                      <div>{this.state.contractAdress}</div>
+                      <div className='address-font'>
+                        <p>{this.state.contractAddress}</p>
+                      </div>
                     )}
 
                     <button className='button'>Submit</button>

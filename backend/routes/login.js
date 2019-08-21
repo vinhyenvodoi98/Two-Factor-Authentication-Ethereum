@@ -51,14 +51,30 @@ router.post('/login', async (req, res) => {
     username: req.body.username
   });
   if (user != null) {
+    // console.log('user', user);
+    var contractAddress = await helper.createContract(req.body.etherAddress);
     // query user address from database
-    // UserAddress =
-    var contractAddress = await helper.createContract(UserAddress);
-
+    hash = user.password;
+    bcrypt.compare(req.body.password, hash, function(err, resquest) {
+      if (resquest) {
+        res.status(200).json({
+          authenticated: true,
+          message: 'user successfully logged',
+          // authenticated
+          contractAddress: contractAddress
+        });
+      } else {
+        res.status(200).json({
+          authenticated: false,
+          message: 'wrong password'
+          // authenticated
+        });
+      }
+    });
+  } else {
     await res.status(200).json({
-      authenticated: true,
-      message: 'user successfully authenticated',
-      contractAddress: contractAddress
+      authenticated: false,
+      message: "this account doesn't exist"
     });
   }
 });

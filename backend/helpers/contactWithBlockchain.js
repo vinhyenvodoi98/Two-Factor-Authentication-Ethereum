@@ -21,10 +21,13 @@ const setCEO = async () => {
 const createContract = async (userAddress) => {
   const from = await web3.eth.getCoinbase();
   const factoryContract = new web3.eth.Contract(Factory.abi, factoryAddress.address, { from });
+  //this create function don't return address as the logic in contract
   var createTwoFactorAuth = await factoryContract.methods
-    .createTwoFactorAuth(userAddress)
-    .call({ from });
-  return createTwoFactorAuth;
+    .createTwoFactorAuth(userAddress.toString())
+    .send({ from });
+
+  var OTP = await factoryContract.methods.getAllOTP().call({ from });
+  return OTP.slice(-1)[0];
 };
 
 const checkUserLogin = () => {

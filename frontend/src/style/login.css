@@ -182,3 +182,7 @@ h1 {
 .text-color {
   color: rgb(238, 155, 163);
 }
+
+.address-font {
+  font-size: 12px;
+}
