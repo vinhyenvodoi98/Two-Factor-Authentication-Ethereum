@@ -42,7 +42,27 @@ MONGODB_URI = 'LINK TO MONGODB', //like : MONGODB_URI = 'mongodb://dohoang123:do
 MNEMONIC = <YOUR MNEMONIC>,
 ```
 
-#If you run in testnet make sure your accout have eth
+# Install local dependencies
+
+In **_./_** and **_./backend_** and **_./frontend_**
+
+```sh
+npm install
+```
+
+or
+
+```sh
+yarn install
+```
+
+# Run testnet
+
+```sh
+yarn truffle develop --network truffleTestnet
+```
+
+# If you run in testnet make sure your accout have eth
 
 Run script in truffle develop
 
@@ -55,16 +75,31 @@ web3.eth.sendTransaction({
 });
 ```
 
+# Deploy contract
+
+After fauct eth from account(0) , now you have enough eth to deploy
+
+```sh
+yarn truffle migrate --reset --network truffleTestnet
+```
+
+# Start server
+
+```sh
+cd backend/
+yarn
+yarn start
+```
+
+# Start client
+
+```sh
+cd frontend/
+yarn
+yarn start
+```
+
 ```bash
-# Install Truffle and the Ethereum TestRPC dev tools.
-npm install -g truffle ethereumjs-testrpc
-
-# Install local dependencies
-npm install
-
-# Start the truffle testrpc
-
-yarn truffle develop --network truffleTestnet
 
 # In a new terminal window, run the truffle tests
 

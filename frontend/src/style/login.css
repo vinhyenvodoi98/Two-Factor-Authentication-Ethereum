@@ -1,3 +1,5 @@
+@import 'https://fonts.googleapis.com/css?family=Kosugi+Maru&display=swap&subset=japanese';
+
 .login_container {
   display: flex;
   flex-direction: row;
@@ -185,4 +187,22 @@ h1 {
 
 .address-font {
   font-size: 12px;
+}
+
+.verify-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 80%;
+}
+
+.japanese-font {
+  font-family: 'Kosugi Maru', sans-serif;
+  text-align: center;
+  font-size: 50px;
+  font-weight: 700;
+  color: snow;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

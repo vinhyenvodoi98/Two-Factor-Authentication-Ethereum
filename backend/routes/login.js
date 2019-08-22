@@ -5,21 +5,6 @@ const helper = require('../helpers/contactWithBlockchain');
 
 const saltRounds = 10;
 
-// router.post('/2FAuth', async (req, res) => {
-//   var contractAddress = await helper.createContract(req.body.address);
-//   res.json({
-//     authenticated: true,
-//     contractAddress: contractAddress
-//   });
-// });
-
-router.post('/image', async (req, res) => {
-  await res.status(200).json({
-    authenticated: true,
-    message: 'user successfully authenticated'
-  });
-});
-
 router.post('/signup', async (req, res) => {
   const user = await User.findOne({
     username: req.body.username
@@ -35,12 +20,12 @@ router.post('/signup', async (req, res) => {
       etherAddress: req.body.etherAddress
     }).save();
     await res.status(200).json({
-      authenticated: true,
+      signup: true,
       message: 'user successfully signup'
     });
   } else {
     await res.status(200).json({
-      authenticated: false,
+      signup: false,
       message: 'Account already exists '
     });
   }
@@ -51,8 +36,7 @@ router.post('/login', async (req, res) => {
     username: req.body.username
   });
   if (user != null) {
-    // console.log('user', user);
-    var contractAddress = await helper.createContract(req.body.etherAddress);
+    var contractAddress = await helper.createContract(user.etherAddress);
     // query user address from database
     hash = user.password;
     bcrypt.compare(req.body.password, hash, function(err, resquest) {
@@ -60,14 +44,12 @@ router.post('/login', async (req, res) => {
         res.status(200).json({
           authenticated: true,
           message: 'user successfully logged',
-          // authenticated
           contractAddress: contractAddress
         });
       } else {
         res.status(200).json({
           authenticated: false,
           message: 'wrong password'
-          // authenticated
         });
       }
     });
@@ -75,6 +57,26 @@ router.post('/login', async (req, res) => {
     await res.status(200).json({
       authenticated: false,
       message: "this account doesn't exist"
+    });
+  }
+});
+
+router.post('/checkVerify', async (req, res) => {
+  var isVerify = await helper.checkVerify(req.body.contractAddress);
+  if (isVerify) {
+    const user = await User.findOne({
+      etherAddress: req.body.userAddress
+    });
+
+    await res.status(200).json({
+      verified: true,
+      message: 'verification successfully',
+      name: user.name
+    });
+  } else {
+    await res.status(200).json({
+      verified: false,
+      message: 'verification failed'
     });
   }
 });

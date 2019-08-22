@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-// import store from 'store';
+import store from '../store';
+import * as loginAction from '../actions/loginAction';
 import axios from 'axios';
 import '../style/login.css';
 
@@ -14,11 +15,17 @@ class LoginPage extends Component {
       password: '',
       accounts: '',
       contractAddress: '',
-      haveContratAddress: false,
-      login: false
+      havecontractAddress: false,
+      verified: false
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.verifyContract = this.verifyContract.bind(this);
+  }
+
+  async verifyContract() {
+    store.dispatch(loginAction.instantiateContracts(this.state.contractAddress));
+    // khoi tao roi xac thuc
   }
 
   async handleSubmit(event) {
@@ -38,15 +45,14 @@ class LoginPage extends Component {
       })
       .then((res) => {
         console.log(res);
-        this.setState({ contractAddress: res.data.contractAddress, haveContratAddress: true });
+        this.setState({ contractAddress: res.data.contractAddress, havecontractAddress: true });
         // console.log(res);
       });
   }
 
   render() {
-    // console.log(this.props.login);
-    if (this.props.login.web3 !== undefined) {
-      if (!this.state.login) {
+    if (this.props.login.web3) {
+      if (!this.props.login.data.verified) {
         return (
           <div className='login_container'>
             <div className='box'>
@@ -55,6 +61,7 @@ class LoginPage extends Component {
                   <div className='c11' />
                   <div id='left'>
                     <h1 className='s1class text-color'>
+                      {this.homepageRender}
                       <span>SIGN</span>
                       <span className='su'>IN</span>
                     </h1>
@@ -82,46 +89,56 @@ class LoginPage extends Component {
               <div className='choice_container'>
                 <div className='c2'>
                   <h1 className='space_around'>Login</h1>
-                  <form className='form' onSubmit={this.handleSubmit}>
-                    <label className='space_around' htmlFor='username'>
-                      Enter username
-                    </label>
-                    <input
-                      className='input space_around'
-                      id='username'
-                      name='username'
-                      type='text'
-                      placeholder='Username*'
-                    />
 
-                    <label className='space_around' htmlFor='password'>
-                      Enter your password
-                    </label>
-                    <input
-                      className='input space_around'
-                      id='password'
-                      name='password'
-                      type='password'
-                      placeholder='Password*'
-                    />
-
-                    {this.state.havecontractAddress ? (
-                      <div />
-                    ) : (
+                  {this.state.havecontractAddress ? (
+                    <div className='verify-box'>
                       <div className='address-font'>
                         <p>{this.state.contractAddress}</p>
                       </div>
-                    )}
+                      <button className='button' onClick={this.verifyContract}>
+                        Verify
+                      </button>
+                    </div>
+                  ) : (
+                    <form className='form' onSubmit={this.handleSubmit}>
+                      <label className='space_around' htmlFor='username'>
+                        Enter username
+                      </label>
+                      <input
+                        className='input space_around'
+                        id='username'
+                        name='username'
+                        type='text'
+                        placeholder='Username*'
+                      />
 
-                    <button className='button'>Submit</button>
-                  </form>
+                      <label className='space_around' htmlFor='password'>
+                        Enter your password
+                      </label>
+                      <input
+                        className='input space_around'
+                        id='password'
+                        name='password'
+                        type='password'
+                        placeholder='Password*'
+                      />
+                      <button className='button'>Submit</button>
+                    </form>
+                  )}
                 </div>
               </div>
             </div>
           </div>
         );
       } else {
-        return <div className=''>Hello ban :{this.state.name}</div>;
+        return (
+          <div className='login_container'>
+            <div className='japanese-font'>
+              <p>こんにちは</p>
+              <p>{this.props.login.data.name}-さん</p>
+            </div>
+          </div>
+        );
       }
     } else {
       return <div className='' />;
