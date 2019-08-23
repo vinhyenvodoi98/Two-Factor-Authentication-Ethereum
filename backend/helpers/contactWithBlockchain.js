@@ -1,7 +1,7 @@
 require('dotenv').config();
 const HDWalletProvider = require('truffle-hdwallet-provider');
 const Web3 = require('web3');
-let provider = new HDWalletProvider(process.env.MNEMONIC, 'http://localhost:8545');
+let provider = new HDWalletProvider(process.env.MNEMONIC, 'http://localhost:9545');
 var Factory = require('../../frontend/src/contracts/Factory.json');
 var TwoFactorAuth = require('../../frontend/src/contracts/TwoFactorAuth.json');
 var factoryAddress = require('../../factory.json');
