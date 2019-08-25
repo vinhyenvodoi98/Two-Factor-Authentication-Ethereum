@@ -23,7 +23,9 @@ Dependencies:
 
 ### Blockchain
 
-- Truffle config network (testnet)
+- Truffle
+- Rinkeby network
+- Metamask
 
 # Setup .env
 
@@ -38,7 +40,8 @@ Create .enc in /backend
 
 ```js
 MONGODB_URI = 'LINK TO MONGODB', //like : MONGODB_URI = 'mongodb://dohoang123:dohoang123@ds347467.mlab.com:47467/2fa-ethereum',
-MNEMONIC = <YOUR MNEMONIC>,
+MNEMONIC = <YOUR MNEMONIC>
+INFURA_KEY = <YOUR INFURA KEY>
 ```
 
 # Install local dependencies
@@ -56,6 +59,19 @@ yarn install
 ```
 
 # Run testnet
+
+## If run on local network
+
+set up HDWalletProvider in contractWithBlockchain.js to any network you want
+
+```js
+let provider = new HDWalletProvider(
+  process.env.MNEMONIC,
+  `https://rinkeby.infura.io/v3/${process.env.INFURA_KEY}`
+);
+```
+
+and then
 
 ```sh
 yarn truffle develop --network truffleTestnet
@@ -82,10 +98,18 @@ web3.eth.sendTransaction({
 
 # Deploy contract
 
+## If you run on local network
+
 After fauct eth from account(0) , now you have enough eth to deploy
 
 ```sh
 yarn truffle migrate --reset --network truffleTestnet
+```
+
+## If you run on Rinkeby network
+
+```sh
+yarn truffle migrate --network rinkeby
 ```
 
 # Start server

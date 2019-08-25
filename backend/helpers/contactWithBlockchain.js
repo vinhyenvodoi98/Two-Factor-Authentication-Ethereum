@@ -1,7 +1,10 @@
 require('dotenv').config();
 const HDWalletProvider = require('truffle-hdwallet-provider');
 const Web3 = require('web3');
-let provider = new HDWalletProvider(process.env.MNEMONIC, 'http://localhost:9545');
+let provider = new HDWalletProvider(
+  process.env.MNEMONIC,
+  `https://rinkeby.infura.io/v3/${process.env.INFURA_KEY}`
+);
 var Factory = require('../../frontend/src/contracts/Factory.json');
 var TwoFactorAuth = require('../../frontend/src/contracts/TwoFactorAuth.json');
 var factoryAddress = require('../../factory.json');
